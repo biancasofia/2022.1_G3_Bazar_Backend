@@ -4,16 +4,23 @@ on:
   push:
     branches:
       - main
+      - master
   pull_request:
     branches:
       - main
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+
+      - name: Deploy do backend no heroku
+        if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "app-bazar-backend" #Must be unique in Heroku
+          heroku_email: "silvadouglas328@gmail.com"
+          buildpack: "https://github.com/zidizei/heroku-buildpack-tsc#v2.0"
