@@ -23,7 +23,7 @@
 </div>
 
 <!-- Summary -->
-<details>
+<details open>
   <summary>Sumário</summary>
   <ol>
     <li>
