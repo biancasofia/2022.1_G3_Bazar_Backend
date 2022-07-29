@@ -19,6 +19,7 @@ public class ServidorDeRecursosConfiguration extends ResourceServerConfigurerAda
     @Autowired
     private Environment env;
 
+    @Autowired
     private JwtTokenStore armazenadorDeToken;
 
     private final String[] URIS_PUBLICAS = {
