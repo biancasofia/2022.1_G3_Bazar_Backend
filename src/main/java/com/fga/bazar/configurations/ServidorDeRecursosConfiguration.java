@@ -20,7 +20,7 @@ public class ServidorDeRecursosConfiguration extends ResourceServerConfigurerAda
     private Environment env;
 
     @Autowired
-    private JwtTokenStore armazenadorDeToken;
+    private JwtTokenStore jwtTokenStore;
 
     private final String[] URIS_PUBLICAS = {
         "/oauth/token",
@@ -33,7 +33,7 @@ public class ServidorDeRecursosConfiguration extends ResourceServerConfigurerAda
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.tokenStore(armazenadorDeToken);
+        resources.tokenStore(jwtTokenStore);
     }
 
     @Override

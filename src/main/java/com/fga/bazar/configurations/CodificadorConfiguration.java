@@ -10,11 +10,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 public class CodificadorConfiguration {
 
-    private final String SEGREDO_JWT;
-
-    public CodificadorConfiguration(@Value("${jwt.secret}") final String segredoJwt) {
-        this.SEGREDO_JWT = segredoJwt;
-    }
+    @Value("${jwt.secret}")
+    private String segredoJwt;
 
     @Bean
     public BCryptPasswordEncoder codificadorDeSenha() {
@@ -24,7 +21,7 @@ public class CodificadorConfiguration {
     @Bean
     public JwtAccessTokenConverter conversorDeToken() {
         var conversorToken = new JwtAccessTokenConverter();
-        conversorToken.setSigningKey(SEGREDO_JWT);
+        conversorToken.setSigningKey(segredoJwt);
 
         return conversorToken;
     }

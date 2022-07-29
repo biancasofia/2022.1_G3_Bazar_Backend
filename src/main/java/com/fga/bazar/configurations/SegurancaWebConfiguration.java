@@ -18,7 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SegurancaWebConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private BCryptPasswordEncoder codificadorDeSenha;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -26,7 +26,7 @@ public class SegurancaWebConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
-                .passwordEncoder(codificadorDeSenha);
+                .passwordEncoder(passwordEncoder);
     }
 
     @Override
