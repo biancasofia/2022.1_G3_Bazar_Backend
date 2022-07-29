@@ -2,36 +2,29 @@ package com.fga.bazar.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "cidade")
-public class Cidade implements Serializable {
+@Table(name = "estado")
+public class Estado implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 30, nullable = false, unique = true)
+    @Column(length = 20, nullable = false, unique = true)
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "estado_id", nullable = false, foreignKey = @ForeignKey(name = "CIDADE_ESTADO_FK"))
-    private Estado estado;
+    @OneToMany(mappedBy = "estado")
+    private List<Cidade> cidades = new ArrayList<>();
 
-    public Estado getEstado() {
-        return estado;
+    public Estado() {
     }
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
-    public Cidade() {}
-
-    public Cidade(Integer id, String nome, Estado estado) {
+    public Estado(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.estado = estado;
     }
 
     public Integer getId() {
@@ -48,6 +41,10 @@ public class Cidade implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Cidade> getCidades() {
+        return cidades;
     }
 
 }
