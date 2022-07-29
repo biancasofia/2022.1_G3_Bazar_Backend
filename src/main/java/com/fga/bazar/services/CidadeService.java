@@ -8,7 +8,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,6 +24,11 @@ public class CidadeService {
     @Transactional(readOnly = true)
     public List<Cidade> listarCidades() {
         return cidadeRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Cidade> buscarCidadesPorSiglaDoEstado(String sigla) {
+        return cidadeRepository.buscarCidadesPorSiglaDoEstado(sigla);
     }
 
     @Transactional

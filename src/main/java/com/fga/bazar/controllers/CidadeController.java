@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -20,6 +19,12 @@ public class CidadeController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Cidade> buscarPorId(@PathVariable Integer id) {
         var cidade = cidadeService.buscarPorId(id);
+        return ResponseEntity.ok().body(cidade);
+    }
+
+    @GetMapping(value = "/estado/{sigla}")
+    public ResponseEntity<List<Cidade>> buscarCidadesPorSiglaDoEstado(@PathVariable String sigla) {
+        var cidade = cidadeService.buscarCidadesPorSiglaDoEstado(sigla);
         return ResponseEntity.ok().body(cidade);
     }
 

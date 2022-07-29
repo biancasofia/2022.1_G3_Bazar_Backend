@@ -1,5 +1,7 @@
 package com.fga.bazar.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,17 +15,21 @@ public class Estado implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(length = 2, nullable = false, unique = true)
+    private String sigla;
+
     @Column(length = 20, nullable = false, unique = true)
     private String nome;
 
-    @OneToMany(mappedBy = "estado")
+    @OneToMany(mappedBy = "estado", fetch = FetchType.LAZY)
     private List<Cidade> cidades = new ArrayList<>();
 
     public Estado() {
     }
 
-    public Estado(Integer id, String nome) {
+    public Estado(Integer id, String sigla, String nome) {
         this.id = id;
+        this.sigla = sigla;
         this.nome = nome;
     }
 
@@ -35,6 +41,14 @@ public class Estado implements Serializable {
         this.id = id;
     }
 
+    public String getSigla() {
+        return sigla;
+    }
+
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -43,6 +57,7 @@ public class Estado implements Serializable {
         this.nome = nome;
     }
 
+    @JsonIgnore
     public List<Cidade> getCidades() {
         return cidades;
     }

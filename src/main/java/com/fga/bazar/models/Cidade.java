@@ -18,14 +18,6 @@ public class Cidade implements Serializable {
     @JoinColumn(name = "estado_id", nullable = false, foreignKey = @ForeignKey(name = "CIDADE_ESTADO_FK"))
     private Estado estado;
 
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
     public Cidade() {}
 
     public Cidade(Integer id, String nome, Estado estado) {
@@ -48,6 +40,14 @@ public class Cidade implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
 }
