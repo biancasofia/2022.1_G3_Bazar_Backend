@@ -3,7 +3,10 @@ package com.fga.bazar.services;
 import com.fga.bazar.models.Cidade;
 import com.fga.bazar.repositories.CidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,28 +17,48 @@ public class CidadeService {
     @Autowired
     private CidadeRepository cidadeRepository;
 
+    @Transactional(readOnly = true)
     public Cidade buscarPorId(Integer id) {
         return cidadeRepository.findById(id).orElseThrow();
     }
 
+    @Transactional(readOnly = true)
     public List<Cidade> listarCidades() {
         return cidadeRepository.findAll();
     }
 
+    @Transactional
     public Cidade inserir(Cidade cidade) {
-        return cidadeRepository.save(cidade);
+        var novaCidade = new Cidade();
+
+        novaCidade.setNome(cidade.getNome());
+
+        novaCidade = cidadeRepository.save(cidade);
+
+        return novaCidade;
     }
 
+    @Transactional
     public void atualizarCidade(Integer id, Cidade cidade) {
-        var cidadeSalva = this.buscarPorId(id);
+        try {
+            var cidadeSalva = cidadeRepository.getReferenceById(id);
 
-        cidadeSalva.setNome(cidade.getNome());
+            cidadeSalva.setNome(cidade.getNome());
 
-        cidadeRepository.save(cidadeSalva);
+            cidadeRepository.save(cidadeSalva);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void excluirCidade(Integer id) {
-        cidadeRepository.deleteById(id);
+        try {
+            cidadeRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new RuntimeException(e);
+        } catch (DataIntegrityViolationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
