@@ -107,6 +107,11 @@ public class Usuario implements Serializable, UserDetails {
                 .toList();
     }
 
+    public boolean hasPapel(String autoridade) {
+        return papeis.stream()
+                .anyMatch(papel -> papel.getAutoridade().equals(autoridade));
+    }
+
     @Override
     public String getPassword() {
         return senha;
