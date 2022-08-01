@@ -6,7 +6,6 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.springframework.dao.DataIntegrityViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +14,10 @@ public class CategoriaService {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
+
     public Categoria inserir(Categoria categoria) {
 
-        return  categoriaRepository.save(categoria);
+        return categoriaRepository.save(categoria);
     }
 
     public Categoria buscarPorId(Integer id) {
@@ -30,7 +30,6 @@ public class CategoriaService {
     public List<Categoria> buscarCategorias() {
         return categoriaRepository.findAll();
     }
-    
 
 
     public void atualizarCategoria(Integer id, Categoria categoria) {
@@ -48,3 +47,6 @@ public class CategoriaService {
             throw new DataIntegrityViolationException("Não é possível excluir esta categoria");
         }
     }
+
+
+}
