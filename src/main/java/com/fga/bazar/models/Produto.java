@@ -2,6 +2,8 @@ package com.fga.bazar.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "produto")
@@ -16,6 +18,17 @@ public class Produto implements Serializable {
     @Column(nullable = false)
     private float preco;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "produto-categorias",
+            joinColumns = @JoinColumn(name = "produto_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id", nullable = false)
+    )
+    private final List<Categoria> categorias = new ArrayList<>();
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+    
     public Produto(){
 
     }
