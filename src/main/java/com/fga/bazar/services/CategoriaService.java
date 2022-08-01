@@ -27,11 +27,10 @@ public class CategoriaService {
         );
     }
 
-    public List<Categoria> buscarCidades() {
+    public List<Categoria> buscarCategorias() {
         return categoriaRepository.findAll();
     }
-
-
+    
 
 
     public void atualizarCategoria(Integer id, Categoria categoria) {
@@ -49,5 +48,3 @@ public class CategoriaService {
             throw new DataIntegrityViolationException("Não é possível excluir esta categoria");
         }
     }
-
-}

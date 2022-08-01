@@ -35,8 +35,8 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> buscarCidades() {
-        var categorias = categoriaService.buscarCidades();
+    public ResponseEntity<List<Categoria>> buscarCategorias() {
+        var categorias = categoriaService.buscarCategorias();
         return ResponseEntity.ok().body(categorias);
     }
 
