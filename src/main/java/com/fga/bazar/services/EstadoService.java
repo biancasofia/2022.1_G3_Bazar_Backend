@@ -1,6 +1,8 @@
 package com.fga.bazar.services;
 
+import com.fga.bazar.models.Cidade;
 import com.fga.bazar.models.Estado;
+import com.fga.bazar.models.dtos.EstadoDto;
 import com.fga.bazar.repositories.CidadeRepository;
 import com.fga.bazar.repositories.EstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,26 +33,22 @@ public class EstadoService {
     }
 
     @Transactional
-    public Estado inserir(Estado estado) {
+    public EstadoDto inserir(EstadoDto estadoDto) {
         var novoEstado = new Estado();
 
-        novoEstado.setSigla(estado.getSigla());
-        novoEstado.setNome(estado.getNome());
+        novoEstado.setSigla(estadoDto.getSigla());
+        novoEstado.setNome(estadoDto.getNome());
 
         novoEstado = estadoRepository.save(novoEstado);
 
-        System.out.println("asdasdfasdfasdf");
-        for ( var cidade : estado.getCidades() ){
-            cidade.setEstado(novoEstado);
-            var novaCidade = cidadeRepository.save(cidade);
+        for ( var cidade : estadoDto.getCidades() ){
+            var novaCidade = new Cidade(null, cidade.getNome(), novoEstado);
+            novaCidade = cidadeRepository.save(novaCidade);
+
             novoEstado.getCidades().add(novaCidade);
-            System.out.println(cidade.getNome());
         }
 
-        novoEstado = estadoRepository.save(novoEstado);
-
-
-        return novoEstado;
+        return new EstadoDto(novoEstado);
     }
 
     @Transactional

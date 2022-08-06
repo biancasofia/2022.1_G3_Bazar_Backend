@@ -1,6 +1,7 @@
 package com.fga.bazar.controllers;
 
 import com.fga.bazar.models.Estado;
+import com.fga.bazar.models.dtos.EstadoDto;
 import com.fga.bazar.services.EstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class EstadoController {
     }
 
     @PostMapping
-    public ResponseEntity<Estado> inserir(@RequestBody Estado estado) {
+    public ResponseEntity<EstadoDto> inserir(@RequestBody EstadoDto estado) {
         estado = estadoService.inserir(estado);
 
         var uri = ServletUriComponentsBuilder
