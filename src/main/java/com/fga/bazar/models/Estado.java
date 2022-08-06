@@ -57,7 +57,7 @@ public class Estado implements Serializable {
         this.nome = nome;
     }
 
-    @JsonIgnore
+
     public List<Cidade> getCidades() {
         return cidades;
     }

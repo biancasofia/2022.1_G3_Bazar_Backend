@@ -32,17 +32,6 @@ public class CidadeService {
     }
 
     @Transactional
-    public Cidade inserir(Cidade cidade) {
-        var novaCidade = new Cidade();
-
-        novaCidade.setNome(cidade.getNome());
-
-        novaCidade = cidadeRepository.save(cidade);
-
-        return novaCidade;
-    }
-
-    @Transactional
     public void atualizarCidade(Integer id, Cidade cidade) {
         try {
             var cidadeSalva = cidadeRepository.getReferenceById(id);
