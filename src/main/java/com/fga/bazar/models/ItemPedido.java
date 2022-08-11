@@ -13,6 +13,11 @@ import java.io.Serializable;
 @Table(name = "item-pedido")
 public class ItemPedido extends ProdutoComponent implements Serializable {
 
+    @Override
+    public float getPreco() {
+        return (precoItem - desconto) * quantidade;
+    }
+
     @JsonIgnore
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
@@ -82,11 +87,6 @@ public class ItemPedido extends ProdutoComponent implements Serializable {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
-    }
-
-    @Override
-    public float getPreco() {
-        return (precoItem - desconto) * quantidade;
     }
 
 }

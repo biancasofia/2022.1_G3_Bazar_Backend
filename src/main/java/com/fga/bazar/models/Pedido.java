@@ -20,7 +20,7 @@ public class Pedido extends ProdutoComponent implements Serializable {
     private Instant data;
 
     @OneToMany(mappedBy = "id.pedido")
-    private List<ItemPedido> itens = new ArrayList<>();
+    private final List<ItemPedido> itens = new ArrayList<>();
 
     public Pedido() {}
 

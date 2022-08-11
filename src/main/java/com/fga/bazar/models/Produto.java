@@ -11,6 +11,13 @@ import java.util.List;
 @Entity
 @Table(name = "produto")
 public class Produto extends ProdutoComponent implements Serializable {
+
+    @Override
+    public float getPreco() {
+        return preco;
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -62,9 +69,7 @@ public class Produto extends ProdutoComponent implements Serializable {
         this.nome = nome;
     }
 
-    public float getPreco() {
-        return preco;
-    }
+
 
     public void setPreco(float preco) {
         this.preco = preco;
