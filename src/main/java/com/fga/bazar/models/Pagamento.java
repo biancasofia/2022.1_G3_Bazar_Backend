@@ -17,6 +17,8 @@ import java.time.Instant;
         private String statusPagamento ; // classe do tipo StatusPagamento, está string a nivel de exemplo
 
         @Column(nullable = false)
+        @OneToOne
+        @JoinColumn(name = "pedido_id", referencedColumnName = "id")
         private Pedido pedido;
 
         public Integer getId() {

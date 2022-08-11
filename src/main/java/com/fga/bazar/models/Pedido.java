@@ -20,6 +20,10 @@ import java.time.Instant;
         @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "PEDIDO_USER_FK"))
         private Usuario usuario;
 
+        // apenas referenciar a chave estrangeira
+        @OneToOne(mappedBy = "pedido")
+        private Pagamento pagamento;
+        //
         public Usuario getUsuario() {
             return usuario;
         }
