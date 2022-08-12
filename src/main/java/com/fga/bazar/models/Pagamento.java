@@ -2,9 +2,6 @@ package com.fga.bazar.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
-
-
 
     @Entity
     @Table(name = "pagamento")
@@ -20,6 +17,8 @@ import java.time.Instant;
         @OneToOne
         @JoinColumn(name = "pedido_id", referencedColumnName = "id")
         private Pedido pedido;
+
+        public abstract String gerarRelatorio();
 
         public Integer getId() {
             return id;
@@ -44,7 +43,5 @@ import java.time.Instant;
         public void setPedido(Pedido pedido) {
             this.pedido = pedido;
         }
-
-
 
     }
