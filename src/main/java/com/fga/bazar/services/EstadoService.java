@@ -39,7 +39,6 @@ public class EstadoService {
 
         novoEstado = estadoRepository.save(novoEstado);
 
-        System.out.println("asdasdfasdfasdf");
         for ( var cidade : estado.getCidades() ){
             cidade.setEstado(novoEstado);
             var novaCidade = cidadeRepository.save(cidade);
