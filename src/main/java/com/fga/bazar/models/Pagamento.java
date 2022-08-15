@@ -13,9 +13,8 @@ import java.io.Serializable;
         @Column(nullable = false)
         private String statusPagamento ; // classe do tipo StatusPagamento, está string a nivel de exemplo
 
-        @Column(nullable = false)
         @OneToOne
-        @JoinColumn(name = "pedido_id", referencedColumnName = "id")
+        @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = false)
         private Pedido pedido;
 
         public abstract String gerarRelatorio();
