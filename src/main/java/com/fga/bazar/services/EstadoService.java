@@ -1,6 +1,7 @@
 package com.fga.bazar.services;
 
 import com.fga.bazar.models.Estado;
+import com.fga.bazar.repositories.CidadeRepository;
 import com.fga.bazar.repositories.EstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,6 +16,9 @@ public class EstadoService {
 
     @Autowired
     private EstadoRepository estadoRepository;
+
+    @Autowired
+    private CidadeRepository cidadeRepository;
 
     @Transactional(readOnly = true)
     public Estado buscarPorId(Integer id) {
@@ -34,6 +38,16 @@ public class EstadoService {
         novoEstado.setNome(estado.getNome());
 
         novoEstado = estadoRepository.save(novoEstado);
+
+        for ( var cidade : estado.getCidades() ){
+            cidade.setEstado(novoEstado);
+            var novaCidade = cidadeRepository.save(cidade);
+            novoEstado.getCidades().add(novaCidade);
+            System.out.println(cidade.getNome());
+        }
+
+        novoEstado = estadoRepository.save(novoEstado);
+
 
         return novoEstado;
     }
