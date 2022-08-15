@@ -1,7 +1,7 @@
-INSERT INTO papel (autoridade) VALUES ('ADMIN');
-INSERT INTO papel (autoridade) VALUES ('CLIENTE');
-INSERT INTO papel (autoridade) VALUES ('VENDEDOR');
-INSERT INTO papel (autoridade) VALUES ('FORNECEDOR');
+INSERT INTO papel (autoridade) VALUES ('ROLE_ADMIN');
+INSERT INTO papel (autoridade) VALUES ('ROLE_CLIENTE');
+INSERT INTO papel (autoridade) VALUES ('ROLE_VENDEDOR');
+INSERT INTO papel (autoridade) VALUES ('ROLE_FORNECEDOR');
 
 INSERT INTO usuario (nome, email, senha) VALUES ('douglas', 'douglas@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO usuario (nome, email, senha) VALUES ('gabriel', 'maria@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');

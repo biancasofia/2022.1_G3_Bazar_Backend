@@ -1,6 +1,7 @@
 package com.fga.bazar.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fga.bazar.models.dtos.EstadoDto;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,6 +32,10 @@ public class Estado implements Serializable {
         this.id = id;
         this.sigla = sigla;
         this.nome = nome;
+    }
+
+    public Estado(EstadoDto estadoDto) {
+        this(estadoDto.getId(), estadoDto.getSigla(), estadoDto.getNome());
     }
 
     public Integer getId() {

@@ -1,5 +1,7 @@
 package com.fga.bazar.models;
 
+import com.fga.bazar.models.dtos.CidadeDto;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -24,6 +26,10 @@ public class Cidade implements Serializable {
         this.id = id;
         this.nome = nome;
         this.estado = estado;
+    }
+
+    public Cidade(CidadeDto cidadeDto) {
+        this(cidadeDto.getId(), cidadeDto.getNome(), new Estado(cidadeDto.getEstadoId(), null, null));
     }
 
     public Integer getId() {

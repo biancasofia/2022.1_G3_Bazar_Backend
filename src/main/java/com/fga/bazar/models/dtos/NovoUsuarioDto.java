@@ -1,5 +1,6 @@
 package com.fga.bazar.models.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fga.bazar.models.Usuario;
 
 import java.io.Serializable;
@@ -74,6 +75,7 @@ public class NovoUsuarioDto implements Serializable {
         this.senha = senha;
     }
 
+    @JsonIgnore
     public List<EnderecoDto> getEnderecos() {
         return enderecos;
     }
