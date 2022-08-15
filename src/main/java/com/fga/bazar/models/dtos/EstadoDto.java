@@ -1,36 +1,37 @@
-package com.fga.bazar.models;
+package com.fga.bazar.models.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fga.bazar.models.Estado;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "estado")
-public class Estado implements Serializable {
+public class EstadoDto implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 2, nullable = false, unique = true)
     private String sigla;
 
-    @Column(length = 20, nullable = false, unique = true)
     private String nome;
 
-    @OneToMany(mappedBy = "estado", fetch = FetchType.LAZY)
-    private List<Cidade> cidades = new ArrayList<>();
+    private final List<CidadeDto> cidades = new ArrayList<>();
 
-    public Estado() {
-    }
+    public EstadoDto() {}
 
-    public Estado(Integer id, String sigla, String nome) {
+    public EstadoDto(Integer id, String sigla, String nome) {
         this.id = id;
         this.sigla = sigla;
         this.nome = nome;
+    }
+
+    public EstadoDto(Estado estado) {
+        this.id = estado.getId();
+        this.sigla = estado.getSigla();
+        this.nome = estado.getNome();
+        estado.getCidades()
+                .stream()
+                .map(CidadeDto::new)
+                .forEach(this.cidades::add);
     }
 
     public Integer getId() {
@@ -57,9 +58,7 @@ public class Estado implements Serializable {
         this.nome = nome;
     }
 
-
-    @JsonIgnore
-    public List<Cidade> getCidades() {
+    public List<CidadeDto> getCidades() {
         return cidades;
     }
 

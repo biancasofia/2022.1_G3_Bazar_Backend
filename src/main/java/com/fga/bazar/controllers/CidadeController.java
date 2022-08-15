@@ -5,7 +5,6 @@ import com.fga.bazar.services.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -32,19 +31,6 @@ public class CidadeController {
     public ResponseEntity<List<Cidade>> listarCidades() {
         var cidades = cidadeService.listarCidades();
         return ResponseEntity.ok().body(cidades);
-    }
-
-    @PostMapping
-    public ResponseEntity<Cidade> inserir(@RequestBody Cidade cidade) {
-        cidade = cidadeService.inserir(cidade);
-
-        var uri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(cidade.getId())
-                .toUri();
-
-        return ResponseEntity.created(uri).body(cidade);
     }
 
     @PutMapping(value = "/{id}")
