@@ -20,12 +20,16 @@ public class Endereco implements Serializable {
 
     @Column(nullable = false)
     private String bairro;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String complemento;
 
     @ManyToOne
     @JoinColumn(name = "cidade_id", nullable = false, foreignKey = @ForeignKey(name = "ENDERECO_CIDADE_FK"))
     private Cidade cidade;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false, foreignKey = @ForeignKey(name = "ENDERECO_USUARIO_ID"))
+    private Usuario usuario;
 
     public Endereco() {}
 
