@@ -1,5 +1,8 @@
 package com.fga.bazar.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fga.bazar.models.composite.ProdutoComponent;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,7 +10,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "produto")
-public class Produto implements Serializable {
+public class Produto extends ProdutoComponent implements Serializable {
+
+    @Override
+    public float getPreco() {
+        return preco;
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -25,6 +35,10 @@ public class Produto implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "categoria_id", nullable = false)
     )
     private final List<Categoria> categorias = new ArrayList<>();
+
+    @OneToMany(mappedBy = "id.produto")
+    private List<ItemPedido> itens = new ArrayList<>();
+
     public List<Categoria> getCategorias() {
         return categorias;
     }
@@ -55,12 +69,15 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
-    public float getPreco() {
-        return preco;
-    }
+
 
     public void setPreco(float preco) {
         this.preco = preco;
+    }
+
+    @JsonIgnore
+    public List<ItemPedido> getItens() {
+        return itens;
     }
 
 }

@@ -41,10 +41,11 @@ public class EstadoService {
 
         novoEstado = estadoRepository.save(novoEstado);
 
+
         for ( var cidade : estadoDto.getCidades() ){
             var novaCidade = new Cidade(null, cidade.getNome(), novoEstado);
             novaCidade = cidadeRepository.save(novaCidade);
-
+            
             novoEstado.getCidades().add(novaCidade);
         }
 
