@@ -42,6 +42,9 @@ public class Usuario implements Serializable, UserDetails {
     )
     private final List<Papel> papeis = new ArrayList<>();
 
+    @OneToMany(mappedBy = "usuario")
+    private final List<Endereco> enderecos = new ArrayList<>();
+
     public Usuario() {}
 
     public Usuario(Integer id, String nome, String cpf, String email, String senha) {
@@ -100,6 +103,10 @@ public class Usuario implements Serializable, UserDetails {
         return telefones;
     }
 
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return papeis.stream()
@@ -141,4 +148,5 @@ public class Usuario implements Serializable, UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
