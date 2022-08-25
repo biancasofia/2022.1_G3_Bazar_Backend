@@ -33,9 +33,18 @@ public class PedidoService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
+    @Autowired
+    private AutorizacaoService autorizacaoService;
+
     @Transactional(readOnly = true)
     public Page<PedidoDto> listarPedidos(Pageable pageable) {
-        return pedidoRepository.findAll(pageable).map(pedido -> new PedidoDto(pedido));
+        return pedidoRepository.findAll(pageable).map(PedidoDto::new);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<PedidoDto> listarPedidosDoUsuarioLogado(Pageable pageable) {
+        var usuario = autorizacaoService.obterUsuarioAutenticado();
+        return pedidoRepository.findPedidoByClienteId(usuario.getId(), pageable).map(PedidoDto::new);
     }
 
     @Transactional

@@ -23,6 +23,12 @@ public class PedidoController {
         return ResponseEntity.ok().body(pedidos);
     }
 
+    @GetMapping(value = "/meus-pedidos")
+    public ResponseEntity<Page<PedidoDto>> listarPedidosDoUsuarioLogado(Pageable pageable) {
+        var pedidos = pedidoService.listarPedidosDoUsuarioLogado(pageable);
+        return ResponseEntity.ok().body(pedidos);
+    }
+
     @PostMapping
     public ResponseEntity<Pedido> realizarPedido(@RequestBody Pedido pedido) {
         var pedidoRealizado = pedidoService.realizarPedido(pedido);
