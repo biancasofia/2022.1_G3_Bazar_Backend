@@ -1,9 +1,12 @@
 package com.fga.bazar.services;
 
 import com.fga.bazar.models.Pedido;
+import com.fga.bazar.models.dtos.PedidoDto;
 import com.fga.bazar.models.enums.StatusPagamento;
 import com.fga.bazar.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +33,11 @@ public class PedidoService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
+    @Transactional(readOnly = true)
+    public Page<PedidoDto> listarPedidos(Pageable pageable) {
+        return pedidoRepository.findAll(pageable).map(pedido -> new PedidoDto(pedido));
+    }
+
     @Transactional
     public Pedido realizarPedido(Pedido pedido) {
         var cliente = usuarioRepository.findById(pedido.getCliente().getId()).orElseThrow();
@@ -41,8 +49,6 @@ public class PedidoService {
         pedido.setEnderecoEntrega(enderecoEntrega);
         pedido.getPagamento().setStatusPagamento(StatusPagamento.PEDENTE);
         pedido.getPagamento().setPedido(pedido);
-
-        System.out.println(pedido.toString());
 
         pedido = pedidoRepository.save(pedido);
 

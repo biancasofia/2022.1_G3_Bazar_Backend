@@ -1,5 +1,6 @@
 package com.fga.bazar.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +29,7 @@ public class Usuario implements Serializable, UserDetails {
     @Column(nullable = false, length = 255)
     private String senha;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "telefone")
     @Column(name = "telefone", nullable = false, length = 15)
     private final Set<String> telefones = new HashSet<>();
@@ -43,9 +44,11 @@ public class Usuario implements Serializable, UserDetails {
     private final List<Papel> papeis = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
     private final List<Endereco> enderecos = new ArrayList<>();
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private final List<Pedido> pedidos = new ArrayList<>();
 
     public Usuario() {}

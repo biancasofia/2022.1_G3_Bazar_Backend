@@ -1,5 +1,6 @@
 package com.fga.bazar.models.dtos;
 
+import com.fga.bazar.models.Pagamento;
 import com.fga.bazar.models.enums.StatusPagamento;
 
 import java.io.Serializable;
@@ -15,6 +16,11 @@ public class PagamentoDto implements Serializable {
     public PagamentoDto(Integer id, StatusPagamento statusPagamento) {
         this.id = id;
         this.statusPagamento = statusPagamento;
+    }
+
+    public PagamentoDto(Pagamento pagamento) {
+        this.id = pagamento.getId();
+        this.statusPagamento = pagamento.getStatusPagamento();
     }
 
     public Integer getId() {

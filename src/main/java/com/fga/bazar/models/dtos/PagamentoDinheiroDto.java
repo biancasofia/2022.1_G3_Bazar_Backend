@@ -21,11 +21,12 @@ public class PagamentoDinheiroDto extends PagamentoDto {
         this.troco = pagamentoDinheiro.getTroco();
     }
 
-    public Float getDesconto() {
+    public Float getTroco() {
         return troco;
     }
 
-    public void setDesconto(Float troco) {
+    public void setTroco(Float troco) {
         this.troco = troco;
     }
+
 }

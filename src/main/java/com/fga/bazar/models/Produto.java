@@ -30,6 +30,7 @@ public class Produto implements Serializable {
     private final List<Categoria> categorias = new ArrayList<>();
 
     @OneToMany(mappedBy = "id.produto")
+    @JsonIgnore
     private final List<ItemPedido> itens = new ArrayList<>();
 
     public List<Categoria> getCategorias() {
@@ -70,7 +71,6 @@ public class Produto implements Serializable {
         this.preco = preco;
     }
 
-    @JsonIgnore
     public List<ItemPedido> getItens() {
         return itens;
     }

@@ -1,22 +1,23 @@
 package com.fga.bazar.models.dtos;
 
+import com.fga.bazar.models.PagamentoPix;
 import com.fga.bazar.models.enums.StatusPagamento;
 
 import java.io.Serializable;
 
-public class PagamentoPix extends PagamentoDto implements Serializable {
+public class PagamentoPixDto extends PagamentoDto implements Serializable {
 
     private String chavePix;
 
-    public PagamentoPix() {
+    public PagamentoPixDto() {
     }
 
-    public PagamentoPix(Integer id, StatusPagamento statusPagamento, String chavePix) {
+    public PagamentoPixDto(Integer id, StatusPagamento statusPagamento, String chavePix) {
         super(id, statusPagamento);
         this.chavePix = chavePix;
     }
 
-    public PagamentoPix(PagamentoPix pagamentoPix) {
+    public PagamentoPixDto(PagamentoPix pagamentoPix) {
         super(pagamentoPix.getId(), pagamentoPix.getStatusPagamento());
         this.chavePix = pagamentoPix.getChavePix();
     }

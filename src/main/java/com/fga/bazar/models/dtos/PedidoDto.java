@@ -1,5 +1,9 @@
 package com.fga.bazar.models.dtos;
 
+import com.fga.bazar.models.PagamentoDinheiro;
+import com.fga.bazar.models.PagamentoPix;
+import com.fga.bazar.models.Pedido;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,21 +12,41 @@ public class PedidoDto implements Serializable {
 
     private Integer id;
 
-    private Integer clienteId;
+    private UsuarioDto cliente;
 
-    private Integer enderecoDeEntregaId;
+    private EnderecoDto enderecoDeEntrega;
+
+    private Float totalPedido;
 
     private PagamentoDto pagamentoDto;
 
-    private final List<ProdutoDto> itens = new ArrayList<>();
+    private final List<ItemPedidoDto> itens = new ArrayList<>();
 
     public PedidoDto() {}
 
-    public PedidoDto(Integer id, Integer clienteId, Integer enderecoDeEntregaId, PagamentoDto pagamentoDto) {
+    public PedidoDto(Integer id, UsuarioDto cliente, EnderecoDto enderecoDeEntrega,
+                     Float totalPedido, PagamentoDto pagamentoDto) {
         this.id = id;
-        this.clienteId = clienteId;
-        this.enderecoDeEntregaId = enderecoDeEntregaId;
+        this.cliente = cliente;
+        this.enderecoDeEntrega = enderecoDeEntrega;
+        this.totalPedido = totalPedido;
         this.pagamentoDto = pagamentoDto;
+    }
+
+    public PedidoDto(Pedido pedido) {
+        this.id = pedido.getId();
+        this.cliente = new UsuarioDto(pedido.getCliente());
+        this.enderecoDeEntrega = new EnderecoDto(pedido.getEnderecoEntrega());
+
+        if (pedido.getPagamento() instanceof PagamentoDinheiro) {
+            this.pagamentoDto = new PagamentoDinheiroDto((PagamentoDinheiro) pedido.getPagamento());
+        } else {
+            this.pagamentoDto = new PagamentoPixDto((PagamentoPix) pedido.getPagamento());
+        }
+
+        this.totalPedido = pedido.getPreco();
+
+        pedido.getItens().forEach(item -> itens.add(new ItemPedidoDto(item)));
     }
 
     public Integer getId() {
@@ -33,23 +57,23 @@ public class PedidoDto implements Serializable {
         this.id = id;
     }
 
-    public Integer getClienteId() {
-        return clienteId;
+    public UsuarioDto getCliente() {
+        return cliente;
     }
 
-    public void setClienteId(Integer clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(UsuarioDto cliente) {
+        this.cliente = cliente;
     }
 
-    public Integer getEnderecoDeEntregaId() {
-        return enderecoDeEntregaId;
+    public EnderecoDto getEnderecoDeEntrega() {
+        return enderecoDeEntrega;
     }
 
-    public void setEnderecoDeEntregaId(Integer enderecoDeEntregaId) {
-        this.enderecoDeEntregaId = enderecoDeEntregaId;
+    public void setEnderecoDeEntrega(EnderecoDto enderecoDeEntrega) {
+        this.enderecoDeEntrega = enderecoDeEntrega;
     }
 
-    public PagamentoDto getPagamentoDto() {
+    public PagamentoDto getPagamento() {
         return pagamentoDto;
     }
 
@@ -57,7 +81,15 @@ public class PedidoDto implements Serializable {
         this.pagamentoDto = pagamentoDto;
     }
 
-    public List<ProdutoDto> getItens() {
+    public Float getTotalPedido() {
+        return totalPedido;
+    }
+
+    public void setTotalPedido(Float totalPedido) {
+        this.totalPedido = totalPedido;
+    }
+
+    public List<ItemPedidoDto> getItens() {
         return itens;
     }
 

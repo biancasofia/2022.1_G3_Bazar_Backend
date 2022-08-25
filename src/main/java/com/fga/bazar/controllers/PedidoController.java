@@ -1,13 +1,13 @@
 package com.fga.bazar.controllers;
 
 import com.fga.bazar.models.Pedido;
+import com.fga.bazar.models.dtos.PedidoDto;
 import com.fga.bazar.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
@@ -16,6 +16,12 @@ public class PedidoController {
 
     @Autowired
     private PedidoService pedidoService;
+
+    @GetMapping
+    public ResponseEntity<Page<PedidoDto>> listarPedidos(Pageable pageable) {
+        var pedidos = pedidoService.listarPedidos(pageable);
+        return ResponseEntity.ok().body(pedidos);
+    }
 
     @PostMapping
     public ResponseEntity<Pedido> realizarPedido(@RequestBody Pedido pedido) {
