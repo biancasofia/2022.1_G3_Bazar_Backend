@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "categoria")
@@ -15,6 +17,17 @@ public class Categoria implements Serializable {
     @Column(nullable = false)
     @Length(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
     private String nome;
+
+    @ManyToMany(mappedBy = "produto", fetch = FetchType.LAZY)
+    private List<Produto> produtos = new ArrayList<>();
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
 
     public Categoria() {
 

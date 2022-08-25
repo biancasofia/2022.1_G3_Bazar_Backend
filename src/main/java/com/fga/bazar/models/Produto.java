@@ -36,6 +36,21 @@ public class Produto extends ProdutoComponent implements Serializable {
     )
     private final List<Categoria> categorias = new ArrayList<>();
 
+    @OneToMany(mappedBy = "produto", fetch = FetchType.LAZY)
+    private List<Imagem> imagens = new ArrayList<>();
+
+    public List<Imagem> getImagens() {
+        return imagens;
+    }
+
+    public void setImagens(List<Imagem> imagens) {
+        this.imagens = imagens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
     @OneToMany(mappedBy = "id.produto")
     private List<ItemPedido> itens = new ArrayList<>();
 
@@ -47,10 +62,12 @@ public class Produto extends ProdutoComponent implements Serializable {
 
     }
 
-    public Produto(Integer id, String nome, float preco) {
+    public Produto(Integer id, String nome, float preco, List<Imagem> imagens, List<ItemPedido> itens) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
+        this.imagens = imagens;
+        this.itens = itens;
     }
 
     public Integer getId() {
