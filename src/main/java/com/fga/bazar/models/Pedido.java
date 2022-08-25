@@ -104,5 +104,16 @@ public class Pedido extends ProdutoComponent implements Serializable {
                 .reduce(0f, Float::sum);
     }
 
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", data=" + data +
+                ", cliente=" + cliente +
+                ", enderecoEntrega=" + enderecoEntrega +
+                ", pagamento=" + pagamento +
+                ", itens=" + itens +
+                '}';
+    }
 }
 

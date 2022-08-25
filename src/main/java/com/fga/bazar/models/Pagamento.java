@@ -1,6 +1,7 @@
 package com.fga.bazar.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fga.bazar.models.enums.StatusPagamento;
 
@@ -11,7 +12,11 @@ import java.io.Serializable;
     @Table(name = "pagamento")
     @Inheritance(strategy = InheritanceType.JOINED)
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
-    public abstract class Pagamento implements Serializable {
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value = PagamentoDinheiro.class, name = "pagamentoDinheiro"),
+        @JsonSubTypes.Type(value = PagamentoPix.class, name = "pagamentoPix")
+    })
+    public class Pagamento implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
@@ -20,8 +25,9 @@ import java.io.Serializable;
         @Column(nullable = false)
         private StatusPagamento statusPagamento;
 
+        @JsonIgnore
         @OneToOne
-        @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = false)
+        @JoinColumn(name = "pedido_id", nullable = false)
         @MapsId
         private Pedido pedido;
 
@@ -33,7 +39,7 @@ import java.io.Serializable;
             this.pedido = pedido;
         }
 
-        public abstract String gerarRelatorio();
+        public String gerarRelatorio() {return "";}
 
         public Integer getId() {
             return id;
@@ -51,7 +57,6 @@ import java.io.Serializable;
             this.statusPagamento = statusPagamento;
         }
 
-        @JsonIgnore
         public Pedido getPedido() {
             return pedido;
         }
@@ -60,4 +65,12 @@ import java.io.Serializable;
             this.pedido = pedido;
         }
 
+        @Override
+        public String toString() {
+            return "Pagamento{" +
+                    "id=" + id +
+                    ", statusPagamento=" + statusPagamento +
+                    ", pedido=" + pedido +
+                    '}';
+        }
     }

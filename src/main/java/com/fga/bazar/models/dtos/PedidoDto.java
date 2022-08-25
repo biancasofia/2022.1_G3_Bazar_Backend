@@ -7,16 +7,22 @@ import java.util.List;
 public class PedidoDto implements Serializable {
 
     private Integer id;
+
     private Integer clienteId;
+
     private Integer enderecoDeEntregaId;
+
+    private PagamentoDto pagamentoDto;
+
     private final List<ProdutoDto> itens = new ArrayList<>();
 
     public PedidoDto() {}
 
-    public PedidoDto(Integer id, Integer clienteId, Integer enderecoDeEntregaId) {
+    public PedidoDto(Integer id, Integer clienteId, Integer enderecoDeEntregaId, PagamentoDto pagamentoDto) {
         this.id = id;
         this.clienteId = clienteId;
         this.enderecoDeEntregaId = enderecoDeEntregaId;
+        this.pagamentoDto = pagamentoDto;
     }
 
     public Integer getId() {
@@ -41,6 +47,14 @@ public class PedidoDto implements Serializable {
 
     public void setEnderecoDeEntregaId(Integer enderecoDeEntregaId) {
         this.enderecoDeEntregaId = enderecoDeEntregaId;
+    }
+
+    public PagamentoDto getPagamentoDto() {
+        return pagamentoDto;
+    }
+
+    public void setPagamentoDto(PagamentoDto pagamentoDto) {
+        this.pagamentoDto = pagamentoDto;
     }
 
     public List<ProdutoDto> getItens() {
