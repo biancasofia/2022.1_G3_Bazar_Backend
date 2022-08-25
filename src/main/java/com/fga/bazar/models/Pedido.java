@@ -19,14 +19,28 @@ public class Pedido extends ProdutoComponent implements Serializable {
     @Column(nullable = false)
     private Instant data;
 
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false, foreignKey = @ForeignKey(name = "PEDIDO_CLIENTE_FK"))
+    private Usuario cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "endereco_entrega_id", nullable = false, foreignKey = @ForeignKey(name = "PEDIDO_ENDERECO_FK"))
+    private Endereco enderecoEntrega;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
+    private Pagamento pagamento;
+
     @OneToMany(mappedBy = "id.pedido")
     private final List<ItemPedido> itens = new ArrayList<>();
 
     public Pedido() {}
 
-    public Pedido(Integer id, Instant data) {
+    public Pedido(Integer id, Instant data, Usuario cliente, Endereco enderecoEntrega, Pagamento pagamento) {
         this.id = id;
         this.data = data;
+        this.cliente = cliente;
+        this.enderecoEntrega = enderecoEntrega;
+        this.pagamento = pagamento;
     }
 
     public Integer getId() {
@@ -43,6 +57,30 @@ public class Pedido extends ProdutoComponent implements Serializable {
 
     public void setData(Instant data) {
         this.data = data;
+    }
+
+    public Usuario getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Usuario cliente) {
+        this.cliente = cliente;
+    }
+
+    public Endereco getEnderecoEntrega() {
+        return enderecoEntrega;
+    }
+
+    public void setEnderecoEntrega(Endereco enderecoEntrega) {
+        this.enderecoEntrega = enderecoEntrega;
+    }
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 
     public List<ItemPedido> getItens() {

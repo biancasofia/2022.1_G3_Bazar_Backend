@@ -45,6 +45,9 @@ public class Usuario implements Serializable, UserDetails {
     @OneToMany(mappedBy = "usuario")
     private final List<Endereco> enderecos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "cliente")
+    private final List<Pedido> pedidos = new ArrayList<>();
+
     public Usuario() {}
 
     public Usuario(Integer id, String nome, String cpf, String email, String senha) {
@@ -105,6 +108,10 @@ public class Usuario implements Serializable, UserDetails {
 
     public List<Endereco> getEnderecos() {
         return enderecos;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 
     @Override

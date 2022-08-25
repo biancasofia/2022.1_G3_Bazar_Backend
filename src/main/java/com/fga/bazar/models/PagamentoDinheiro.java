@@ -1,12 +1,16 @@
 package com.fga.bazar.models;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 import java.time.Instant;
 
 @Entity
-@Table(name="PagamentoDinheiro")
-
+@Table(name="pagamento_dinheiro")
+@JsonTypeName(value = "pagamentoDinheiro")
 public abstract class PagamentoDinheiro extends Pagamento {
 
     @Column( nullable = false)
