@@ -1,5 +1,7 @@
 package com.fga.bazar.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -27,6 +29,7 @@ public class Endereco implements Serializable {
     @JoinColumn(name = "cidade_id", nullable = false, foreignKey = @ForeignKey(name = "ENDERECO_CIDADE_FK"))
     private Cidade cidade;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false, foreignKey = @ForeignKey(name = "ENDERECO_USUARIO_ID"))
     private Usuario usuario;
