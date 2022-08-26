@@ -18,7 +18,7 @@ public class Categoria implements Serializable {
     @Length(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
     private String nome;
 
-    @ManyToMany(mappedBy = "produto", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "categorias", fetch = FetchType.LAZY)
     private List<Produto> produtos = new ArrayList<>();
 
     public List<Produto> getProdutos() {

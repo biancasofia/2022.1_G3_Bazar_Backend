@@ -32,36 +32,28 @@ public class Produto implements Serializable {
     @OneToMany(mappedBy = "produto", fetch = FetchType.LAZY)
     private List<Imagem> imagens = new ArrayList<>();
 
+    @OneToMany(mappedBy = "id.produto")
+    @JsonIgnore
+    private final List<ItemPedido> itens = new ArrayList<>();
+
+    public Produto() {}
+
+    public Produto(Integer id, String nome, float preco) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
     public List<Imagem> getImagens() {
         return imagens;
     }
 
     public void setImagens(List<Imagem> imagens) {
         this.imagens = imagens;
-    }
-
-    public void setItens(List<ItemPedido> itens) {
-        this.itens = itens;
-    }
-
-    @OneToMany(mappedBy = "id.produto")
-    @JsonIgnore
-    private final List<ItemPedido> itens = new ArrayList<>();
-
-    public List<Categoria> getCategorias() {
-        return categorias;
-    }
-    
-    public Produto(){
-
-    }
-
-    public Produto(Integer id, String nome, float preco, List<Imagem> imagens, List<ItemPedido> itens) {
-        this.id = id;
-        this.nome = nome;
-        this.preco = preco;
-        this.imagens = imagens;
-        this.itens = itens;
     }
 
     public Integer getId() {
