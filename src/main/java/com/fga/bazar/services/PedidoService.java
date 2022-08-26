@@ -49,7 +49,7 @@ public class PedidoService {
 
     @Transactional
     public Pedido realizarPedido(Pedido pedido) {
-        var cliente = usuarioRepository.findById(pedido.getCliente().getId()).orElseThrow();
+        var cliente = autorizacaoService.obterUsuarioAutenticado();
         var enderecoEntrega = enderecoRepository.findById(pedido.getEnderecoEntrega().getId()).orElseThrow();
 
         pedido.setId(null);
