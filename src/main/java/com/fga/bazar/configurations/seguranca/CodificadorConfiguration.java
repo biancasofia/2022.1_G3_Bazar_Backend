@@ -1,4 +1,4 @@
-package com.fga.bazar.configurations;
+package com.fga.bazar.configurations.seguranca;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
