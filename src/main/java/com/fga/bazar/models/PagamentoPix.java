@@ -1,22 +1,35 @@
 package com.fga.bazar.models;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fga.bazar.models.enums.StatusPagamento;
+
 import javax.persistence.*;
 import java.sql.Date;
 
 
 @Entity
 @Table(name="PagamentoPix")
-
-public abstract class PagamentoPix extends Pagamento {
+@JsonTypeName(value = "pagamentoPix")
+public class PagamentoPix extends Pagamento {
 
     private String chavePix;
     private String nomePagador; 
     private String relatorio;
     private Date data;
 
-    @Column( nullable = false)
-    
-    
+    public PagamentoPix() {
+        super();
+    }
+
+    public PagamentoPix(Integer id, StatusPagamento statusPagamento, Pedido pedido,
+                        String chavePix, String nomePagador, String relatorio, Date data) {
+        super(id, statusPagamento, pedido);
+        this.chavePix = chavePix;
+        this.nomePagador = nomePagador;
+        this.relatorio = relatorio;
+        this.data = data;
+    }
+
     public String gerarRelatorio() {
         return relatorio;
     }

@@ -10,24 +10,20 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "item-pedido")
+@Table(name = "item_pedido")
 public class ItemPedido extends ProdutoComponent implements Serializable {
-
-    @Override
-    public float getPreco() {
-        return (precoItem - desconto) * quantidade;
-    }
 
     @JsonIgnore
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
 
-    @Column(columnDefinition = "DEFALT 0")
+    @Column
     private Float desconto;
 
     @Column(nullable = false)
     private Float precoItem;
 
+    @Column(nullable = false)
     private Integer quantidade;
 
     public ItemPedido() {}
@@ -87,6 +83,10 @@ public class ItemPedido extends ProdutoComponent implements Serializable {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public float getPreco() {
+        return (precoItem - desconto) * quantidade;
     }
 
 }

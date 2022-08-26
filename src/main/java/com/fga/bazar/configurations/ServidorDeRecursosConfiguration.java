@@ -36,9 +36,14 @@ public class ServidorDeRecursosConfiguration extends ResourceServerConfigurerAda
         "/h2-console/**",
     };
 
-    private final String[] URI_GET_PUBLICAS = {};
+    private final String[] URI_GET_PUBLICAS = {
+            "/estados",
+            "/cidades/estado/{uf}",
+    };
 
-    private final String[] URI_POST_PUBLICAS = {};
+    private final String[] URI_POST_PUBLICAS = {
+        "/usuarios"
+    };
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
