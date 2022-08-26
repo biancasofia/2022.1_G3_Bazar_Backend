@@ -1,4 +1,4 @@
-package com.fga.bazar.configurations;
+package com.fga.bazar.configurations.seguranca;
 
 import com.fga.bazar.components.JwtTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;

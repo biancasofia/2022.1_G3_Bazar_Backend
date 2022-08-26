@@ -1,4 +1,4 @@
-package com.fga.bazar.configurations;
+package com.fga.bazar.configurations.seguranca;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

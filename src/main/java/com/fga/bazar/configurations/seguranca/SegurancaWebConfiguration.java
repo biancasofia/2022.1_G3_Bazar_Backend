@@ -1,4 +1,4 @@
-package com.fga.bazar.configurations;
+package com.fga.bazar.configurations.seguranca;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +17,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SegurancaWebConfiguration {
 
+    private static final String[] URI_PUBLICAS = {
+            "/actuator/**",
+            "/v2/api-docs",
+            "/configuration/ui",
+            "/swagger-resources/**",
+            "/configuration/**",
+            "/swagger-ui.html",
+            "/webjars/**",
+    };
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -30,7 +40,7 @@ public class SegurancaWebConfiguration {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/actuator/**");
+        return (web) -> web.ignoring().antMatchers(URI_PUBLICAS);
     }
 
     @Bean
