@@ -26,13 +26,15 @@ public class ProdutoService {
         return produtoRepository.save(produto);
     }
 
-    public void atualizarProduto(Integer id, Produto produto) {
+
+
+    public Produto atualizarProduto(Integer id, Produto produto) {
         var produtoAtualizado = this.buscarPorId(id);
 
         produtoAtualizado.setNome(produto.getNome());
         produtoAtualizado.setPreco(produto.getPreco());
 
-        produtoRepository.save(produtoAtualizado);
+        return produtoRepository.save(produtoAtualizado);
     }
 
     public void excluirProduto(Integer id) {
