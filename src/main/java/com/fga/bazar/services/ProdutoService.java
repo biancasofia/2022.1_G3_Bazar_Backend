@@ -30,11 +30,14 @@ public class ProdutoService {
 
     public Produto atualizarProduto(Integer id, Produto produto) {
         var produtoAtualizado = this.buscarPorId(id);
-
+        try {
         produtoAtualizado.setNome(produto.getNome());
         produtoAtualizado.setPreco(produto.getPreco());
 
-        return produtoRepository.save(produtoAtualizado);
+        return produtoRepository.save(produtoAtualizado); }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void excluirProduto(Integer id) {
