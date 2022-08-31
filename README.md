@@ -143,7 +143,7 @@ Estes são os pré-requisitos necessários para executar este projeto:
 
 Abra o endereço local [http://localhost:8080/](http://localhost:8080/) e qualquer outro recurso da API estará disponível a partir deste endereço.
 
-_Para mais exemplos veja a [Documentação da API](https://example.com)_
+_Para mais exemplos veja a [Documentação da API](https://app-bazar-backend.herokuapp.com/swagger-ui.html#)_
 
 <p align="right">(<a href="#top">Voltar ao topo</a>)</p>
 
