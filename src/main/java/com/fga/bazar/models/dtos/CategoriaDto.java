@@ -9,9 +9,9 @@ import java.util.List;
 
 public class CategoriaDto implements Serializable {
 
-private Integer id;
+    private Integer id;
 
-private String nome;
+    private String nome;
 
     private final List<ProdutoDto> produtos = new ArrayList<>();
 

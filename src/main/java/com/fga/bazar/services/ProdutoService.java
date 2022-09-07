@@ -1,10 +1,16 @@
 package com.fga.bazar.services;
 import com.fga.bazar.models.Produto;
+import com.fga.bazar.models.dtos.ProdutoDto;
 import com.fga.bazar.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProdutoService {
 
@@ -17,16 +23,15 @@ public class ProdutoService {
         return produtoRepository.findById(id).orElseThrow();
     }
 
-    public List<Produto> listarProdutos() {
-        return produtoRepository.findAll();
+    @Transactional(readOnly = true)
+    public Page<ProdutoDto> listarProdutos(Pageable pageable) {
+        return produtoRepository.findAll(pageable)
+                .map(ProdutoDto::new);
     }
 
     public Produto inserirProduto(Produto produto) {
-
         return produtoRepository.save(produto);
     }
-
-
 
     public Produto atualizarProduto(Integer id, Produto produto) {
         var produtoAtualizado = this.buscarPorId(id);

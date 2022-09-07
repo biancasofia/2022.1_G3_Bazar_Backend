@@ -1,12 +1,13 @@
 package com.fga.bazar.controllers;
 import com.fga.bazar.models.Produto;
+import com.fga.bazar.models.dtos.ProdutoDto;
 import com.fga.bazar.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/produtos")
@@ -24,9 +25,8 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Produto>> listarProdutos() {
-        var produtos = produtoService.listarProdutos();
-
+    public ResponseEntity<Page<ProdutoDto>> listarProdutos(Pageable pageable) {
+        var produtos = produtoService.listarProdutos(pageable);
         return ResponseEntity.ok().body(produtos);
     }
 

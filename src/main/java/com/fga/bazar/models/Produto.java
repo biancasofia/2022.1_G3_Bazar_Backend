@@ -33,7 +33,6 @@ public class Produto implements Serializable {
     private List<Imagem> imagens = new ArrayList<>();
 
     @OneToMany(mappedBy = "id.produto")
-    @JsonIgnore
     private final List<ItemPedido> itens = new ArrayList<>();
 
     public Produto() {}
