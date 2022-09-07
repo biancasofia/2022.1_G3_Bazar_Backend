@@ -39,6 +39,7 @@ public class ServidorDeRecursosConfiguration extends ResourceServerConfigurerAda
     private final String[] URI_GET_PUBLICAS = {
             "/estados",
             "/cidades/estado/{uf}",
+            "/produtos",
     };
 
     private final String[] URI_POST_PUBLICAS = {

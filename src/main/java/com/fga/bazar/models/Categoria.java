@@ -1,5 +1,6 @@
 package com.fga.bazar.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Categoria implements Serializable {
     private String nome;
 
     @ManyToMany(mappedBy = "categorias", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Produto> produtos = new ArrayList<>();
 
     public List<Produto> getProdutos() {
