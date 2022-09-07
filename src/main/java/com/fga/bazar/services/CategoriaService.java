@@ -1,13 +1,17 @@
 package com.fga.bazar.services;
 
 import com.fga.bazar.models.Categoria;
+import com.fga.bazar.models.dtos.CategoriaDto;
 import com.fga.bazar.repositories.CategoriaRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoriaService {
@@ -27,8 +31,12 @@ public class CategoriaService {
         );
     }
 
-    public List<Categoria> buscarCategorias() {
-        return categoriaRepository.findAll();
+    @Transactional(readOnly = true)
+    public List<CategoriaDto> buscarCategorias() {
+        return categoriaRepository.findAll()
+                .stream()
+                .map(cat -> new CategoriaDto(cat.getId(), cat.getNome()))
+                .collect(Collectors.toList());
     }
 
 

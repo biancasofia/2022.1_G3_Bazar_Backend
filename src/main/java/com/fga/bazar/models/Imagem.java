@@ -13,7 +13,7 @@ public class Imagem implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column()
+    @Column(columnDefinition = "TEXT")
     private String imagemUrl;
 
     @ManyToOne

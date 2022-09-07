@@ -1,6 +1,7 @@
 package com.fga.bazar.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fga.bazar.models.dtos.ProdutoDto;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,7 +23,6 @@ public class Produto implements Serializable {
     private float preco;
 
     @ManyToMany
-    @JsonIgnore
     @JoinTable(
             name = "produto_categoria",
             joinColumns = @JoinColumn(name = "produto_id", nullable = false),
@@ -31,11 +31,9 @@ public class Produto implements Serializable {
     private final List<Categoria> categorias = new ArrayList<>();
 
     @OneToMany(mappedBy = "produto", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Imagem> imagens = new ArrayList<>();
 
     @OneToMany(mappedBy = "id.produto")
-    @JsonIgnore
     private final List<ItemPedido> itens = new ArrayList<>();
 
     public Produto() {}
@@ -44,6 +42,14 @@ public class Produto implements Serializable {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
+    }
+
+    public Produto(ProdutoDto dto) {
+        this.id = dto.id();
+        this.nome = dto.nome();
+        this.preco = dto.preco();
+        this.categorias.clear();
+        this.categorias.addAll(dto.categorias().stream().map(cat -> new Categoria(cat.getId(), null)).toList());
     }
 
     public List<Categoria> getCategorias() {
