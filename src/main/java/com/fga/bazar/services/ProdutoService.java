@@ -4,6 +4,7 @@ import com.fga.bazar.models.dtos.ProdutoDto;
 import com.fga.bazar.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,8 +25,13 @@ public class ProdutoService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ProdutoDto> listarProdutos(Pageable pageable) {
-        return produtoRepository.findAll(pageable)
+    public Page<ProdutoDto> listarProdutos(Integer idCategoria, Pageable pageable) {
+        if (idCategoria <= 0) {
+            return produtoRepository.findAll(pageable).map(ProdutoDto::new);
+        }
+
+        return produtoRepository
+                .findProdutosPorCategoria(idCategoria, pageable)
                 .map(ProdutoDto::new);
     }
 

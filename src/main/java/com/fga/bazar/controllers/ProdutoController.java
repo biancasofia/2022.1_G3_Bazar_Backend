@@ -25,8 +25,11 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProdutoDto>> listarProdutos(Pageable pageable) {
-        var produtos = produtoService.listarProdutos(pageable);
+    public ResponseEntity<Page<ProdutoDto>> listarProdutos(
+            Pageable pageable,
+            @RequestParam(name = "idCategoria", defaultValue = "0") Integer idCategoria
+    ) {
+        var produtos = produtoService.listarProdutos(idCategoria, pageable);
         return ResponseEntity.ok().body(produtos);
     }
 

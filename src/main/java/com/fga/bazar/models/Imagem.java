@@ -1,5 +1,7 @@
 package com.fga.bazar.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 @Entity
@@ -15,6 +17,7 @@ public class Imagem implements Serializable {
     private String imagemUrl;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "produto_id", nullable = true, foreignKey = @ForeignKey(name = "IMAGEM_PRODUTO_FK"))
     private Produto produto;
 
