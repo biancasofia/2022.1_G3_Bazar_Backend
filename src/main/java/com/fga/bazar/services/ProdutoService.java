@@ -1,7 +1,9 @@
 package com.fga.bazar.services;
+import com.fga.bazar.models.Imagem;
 import com.fga.bazar.models.Produto;
 import com.fga.bazar.models.dtos.ProdutoDto;
 import com.fga.bazar.repositories.CategoriaRepository;
+import com.fga.bazar.repositories.ImagemRepository;
 import com.fga.bazar.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,9 @@ public class ProdutoService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private ImagemRepository imagemRepository;
+
     public Produto buscarPorId(Integer id) {
 
 
@@ -41,7 +46,12 @@ public class ProdutoService {
 
     @Transactional
     public Produto inserirProduto(Produto produto) {
-        return produtoRepository.save(produto);
+        produto = produtoRepository.save(produto);
+        var finalProduto = produto;
+
+        imagemRepository.saveAll(produto.getImagens().stream().map(img -> new Imagem(img.getImagemUrl(), finalProduto)).toList());
+
+        return produto;
     }
 
     public Produto atualizarProduto(Integer id, Produto produto) {
