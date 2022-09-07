@@ -22,7 +22,6 @@ public class Produto implements Serializable {
     private float preco;
 
     @ManyToMany
-    @JsonIgnore
     @JoinTable(
             name = "produto_categoria",
             joinColumns = @JoinColumn(name = "produto_id", nullable = false),
@@ -31,7 +30,6 @@ public class Produto implements Serializable {
     private final List<Categoria> categorias = new ArrayList<>();
 
     @OneToMany(mappedBy = "produto", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Imagem> imagens = new ArrayList<>();
 
     @OneToMany(mappedBy = "id.produto")

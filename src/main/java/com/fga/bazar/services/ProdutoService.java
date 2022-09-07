@@ -1,6 +1,7 @@
 package com.fga.bazar.services;
 import com.fga.bazar.models.Produto;
 import com.fga.bazar.models.dtos.ProdutoDto;
+import com.fga.bazar.repositories.CategoriaRepository;
 import com.fga.bazar.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,9 @@ public class ProdutoService {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     public Produto buscarPorId(Integer id) {
 
@@ -35,6 +39,7 @@ public class ProdutoService {
                 .map(ProdutoDto::new);
     }
 
+    @Transactional
     public Produto inserirProduto(Produto produto) {
         return produtoRepository.save(produto);
     }
