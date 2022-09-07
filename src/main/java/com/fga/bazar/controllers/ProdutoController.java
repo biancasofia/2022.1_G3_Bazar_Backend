@@ -34,16 +34,16 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ResponseEntity<Produto> inserirProduto(@RequestBody Produto produto) {
-        produto = produtoService.inserirProduto(produto);
+    public ResponseEntity<ProdutoDto> inserirProduto(@RequestBody ProdutoDto produtoDto) {
+        produtoDto = produtoService.inserirProduto(produtoDto);
 
         var uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(produto.getId())
+                .buildAndExpand(produtoDto.id())
                 .toUri();
 
-        return ResponseEntity.created(uri).body(produto);
+        return ResponseEntity.created(uri).body(produtoDto);
     }
 
     @PutMapping(value = "/{id}")

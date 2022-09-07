@@ -1,6 +1,7 @@
 package com.fga.bazar.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fga.bazar.models.dtos.ProdutoDto;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -41,6 +42,14 @@ public class Produto implements Serializable {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
+    }
+
+    public Produto(ProdutoDto dto) {
+        this.id = dto.id();
+        this.nome = dto.nome();
+        this.preco = dto.preco();
+        this.categorias.clear();
+        this.categorias.addAll(dto.categorias().stream().map(cat -> new Categoria(cat.getId(), null)).toList());
     }
 
     public List<Categoria> getCategorias() {

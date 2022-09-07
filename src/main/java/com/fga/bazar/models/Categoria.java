@@ -1,5 +1,6 @@
 package com.fga.bazar.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fga.bazar.models.dtos.CategoriaDto;
 import org.hibernate.validator.constraints.Length;
 
@@ -19,6 +20,7 @@ public class Categoria implements Serializable {
     @Length(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
     private String nome;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "categorias", fetch = FetchType.LAZY)
     private List<Produto> produtos = new ArrayList<>();
 

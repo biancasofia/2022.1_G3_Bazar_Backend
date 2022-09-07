@@ -1,6 +1,7 @@
 package com.fga.bazar.services;
 import com.fga.bazar.models.Imagem;
 import com.fga.bazar.models.Produto;
+import com.fga.bazar.models.dtos.CategoriaDto;
 import com.fga.bazar.models.dtos.ProdutoDto;
 import com.fga.bazar.repositories.CategoriaRepository;
 import com.fga.bazar.repositories.ImagemRepository;
@@ -36,7 +37,11 @@ public class ProdutoService {
     @Transactional(readOnly = true)
     public Page<ProdutoDto> listarProdutos(Integer idCategoria, Pageable pageable) {
         if (idCategoria <= 0) {
-            return produtoRepository.findAll(pageable).map(ProdutoDto::new);
+            return produtoRepository
+                    .findAll(pageable)
+                    .map(prod -> new ProdutoDto(prod.getId(), prod.getNome(), prod.getPreco(),
+                            prod.getCategorias().stream().map(cat -> new CategoriaDto(cat.getId(), cat.getNome())).toList(),
+                            imagemRepository.findByProdutoId(prod.getId())));
         }
 
         return produtoRepository
@@ -45,13 +50,15 @@ public class ProdutoService {
     }
 
     @Transactional
-    public Produto inserirProduto(Produto produto) {
-        produto = produtoRepository.save(produto);
+    public ProdutoDto inserirProduto(ProdutoDto produtoDto) {
+        var produto = produtoRepository.save(new Produto(produtoDto));
         var finalProduto = produto;
 
-        imagemRepository.saveAll(produto.getImagens().stream().map(img -> new Imagem(img.getImagemUrl(), finalProduto)).toList());
+        imagemRepository.saveAll(produtoDto.imagens()
+                .stream()
+                .map(img -> new Imagem(img.getImagemUrl(), finalProduto)).toList());
 
-        return produto;
+        return new ProdutoDto(produto);
     }
 
     public Produto atualizarProduto(Integer id, Produto produto) {
