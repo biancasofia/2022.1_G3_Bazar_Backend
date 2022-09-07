@@ -18,10 +18,17 @@ INSERT INTO cidade (nome, estado_id) VALUES ('Recanto das Emas', 1);
 INSERT INTO endereco (bairro, cep, numero, cidade_id, usuario_id) VALUES ('Recanto das Emas', 72600400, 12, 1, 1);
 
 INSERT INTO categoria (nome) VALUES ('Informática');
+INSERT INTO categoria (nome) VALUES ('Acessórios');
+INSERT INTO categoria (nome) VALUES ('Cama, mesa e banho');
 
 INSERT INTO produto (nome, preco) VALUES ('Xiaomi Redmi 11s', 1475.00);
-
 INSERT INTO produto (nome, preco) VALUES ('Xiaomi POCO M3', 1350.00);
+INSERT INTO produto (nome, preco) VALUES ('Pulseira de ouro', 10500.00);
+INSERT INTO produto (nome, preco) VALUES ('Brincos', 10500.00);
+INSERT INTO produto (nome, preco) VALUES ('Trevesseiro', 50.00);
 
 INSERT INTO produto_categoria (produto_id, categoria_id) VALUES (1, 1);
 INSERT INTO produto_categoria (produto_id, categoria_id) VALUES (2, 1);
+INSERT INTO produto_categoria (produto_id, categoria_id) VALUES (3, 2);
+INSERT INTO produto_categoria (produto_id, categoria_id) VALUES (4, 2);
+INSERT INTO produto_categoria (produto_id, categoria_id) VALUES (5, 3);

@@ -1,5 +1,6 @@
 package com.fga.bazar.controllers;
 import com.fga.bazar.models.Categoria;
+import com.fga.bazar.models.dtos.CategoriaDto;
 import com.fga.bazar.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> buscarCategorias() {
+    public ResponseEntity<List<CategoriaDto>> buscarCategorias() {
         var categorias = categoriaService.buscarCategorias();
         return ResponseEntity.ok().body(categorias);
     }
