@@ -1,5 +1,6 @@
 package com.fga.bazar.models;
 
+import com.fga.bazar.models.dtos.CategoriaDto;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -37,6 +38,12 @@ public class Categoria implements Serializable {
         this.id = id;
         this.nome = nome;
     }
+
+    public Categoria(CategoriaDto categoriaDto) {
+        this(categoriaDto.getId(),categoriaDto.getNome());
+    }
+
+
 
     public Integer getId() {
         return id;
