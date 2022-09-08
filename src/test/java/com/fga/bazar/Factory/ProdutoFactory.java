@@ -8,13 +8,13 @@ public class ProdutoFactory {
 
     public static Produto criarProduto() {
         var produto = new Produto(1, "Tela de PC",250);
-        produto.getCategorias().add(new Categoria(1, "Eletrônicos"));
+        produto.getCategorias().add(new Categoria(1, "Eletrônicos", "home"));
 
 
         return produto;
     }
 
     public static Categoria criarCategoria() {
-        return new Categoria(2, "Eletrônicos");
+        return new Categoria(2, "Eletrônicos", "home");
     }
 }

@@ -48,8 +48,7 @@ public class Produto implements Serializable {
         this.id = dto.id();
         this.nome = dto.nome();
         this.preco = dto.preco();
-        this.categorias.clear();
-        this.categorias.addAll(dto.categorias().stream().map(cat -> new Categoria(cat.getId(), null)).toList());
+        this.categorias.addAll(dto.categorias().stream().map(cat -> new Categoria(cat.getId(), null, null)).toList());
     }
 
     public List<Categoria> getCategorias() {
