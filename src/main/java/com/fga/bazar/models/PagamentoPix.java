@@ -11,12 +11,15 @@ import java.sql.Date;
 @Table(name="PagamentoPix")
 @JsonTypeName(value = "pagamentoPix")
 public class PagamentoPix extends Pagamento {
-
+    @Column(nullable = false)
     private String chavePix;
-    private String nomePagador; 
-    private String relatorio;
+    @Column(nullable = false)
+    private String nomePagador;
+
+    @Column(nullable = false)
     private Date data;
 
+    private String relatorio;
     public PagamentoPix() {
         super();
     }

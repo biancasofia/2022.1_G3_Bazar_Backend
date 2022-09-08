@@ -13,10 +13,13 @@ import java.time.Instant;
 @JsonTypeName(value="pagamentoDinheiro")
 public class PagamentoDinheiro extends Pagamento {
 
-    @Column(nullable = false)
+    @Column()
     private Float troco;
-    private String nomePagador; 
+    @Column(nullable = false)
+    private String nomePagador;
+    @Column(nullable = false)
     private Instant data;
+
     private String relatorio;
 
     public PagamentoDinheiro() {}
