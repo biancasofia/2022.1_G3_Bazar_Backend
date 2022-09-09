@@ -17,7 +17,7 @@ public record ProdutoDto(
 
     public ProdutoDto(Produto produto) {
         this(produto.getId(), produto.getNome(), produto.getPreco(),
-                produto.getCategorias().stream().map(cat -> new CategoriaDto(cat.getId(), cat.getNome())).toList(),
+                produto.getCategorias().stream().map(cat -> new CategoriaDto(cat.getId(), cat.getNome(), cat.getIcone())).toList(),
                 produto.getImagens()
         );
     }

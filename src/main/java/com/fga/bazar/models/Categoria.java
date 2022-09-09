@@ -20,6 +20,9 @@ public class Categoria implements Serializable {
     @Length(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
     private String nome;
 
+    @Column(nullable = true, columnDefinition = "TEXT")
+    private String icone;
+
     @JsonIgnore
     @ManyToMany(mappedBy = "categorias", fetch = FetchType.LAZY)
     private List<Produto> produtos = new ArrayList<>();
@@ -36,13 +39,14 @@ public class Categoria implements Serializable {
 
     }
 
-    public Categoria(Integer id, String nome) {
+    public Categoria(Integer id, String nome, String icone) {
         this.id = id;
         this.nome = nome;
+        this.icone = icone;
     }
 
     public Categoria(CategoriaDto categoriaDto) {
-        this(categoriaDto.getId(),categoriaDto.getNome());
+        this(categoriaDto.getId(),categoriaDto.getNome(), categoriaDto.getIcone());
     }
 
 
@@ -61,5 +65,13 @@ public class Categoria implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getIcone() {
+        return icone;
+    }
+
+    public void setIcone(String icone) {
+        this.icone = icone;
     }
 }
