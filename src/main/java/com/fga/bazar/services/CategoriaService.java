@@ -35,7 +35,7 @@ public class CategoriaService {
     public List<CategoriaDto> buscarCategorias() {
         return categoriaRepository.findAll()
                 .stream()
-                .map(cat -> new CategoriaDto(cat.getId(), cat.getNome()))
+                .map(cat -> new CategoriaDto(cat.getId(), cat.getNome(), cat.getIcone()))
                 .collect(Collectors.toList());
     }
 

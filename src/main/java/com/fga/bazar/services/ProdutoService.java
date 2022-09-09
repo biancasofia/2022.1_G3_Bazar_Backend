@@ -40,13 +40,15 @@ public class ProdutoService {
             return produtoRepository
                     .findAll(pageable)
                     .map(prod -> new ProdutoDto(prod.getId(), prod.getNome(), prod.getPreco(),
-                            prod.getCategorias().stream().map(cat -> new CategoriaDto(cat.getId(), cat.getNome())).toList(),
+                            prod.getCategorias().stream().map(cat -> new CategoriaDto(cat.getId(), cat.getNome(), cat.getIcone())).toList(),
                             imagemRepository.findByProdutoId(prod.getId())));
         }
 
         return produtoRepository
                 .findProdutosPorCategoria(idCategoria, pageable)
-                .map(ProdutoDto::new);
+                .map(prod -> new ProdutoDto(prod.getId(), prod.getNome(), prod.getPreco(),
+                        prod.getCategorias().stream().map(cat -> new CategoriaDto(cat.getId(), cat.getNome(), cat.getIcone())).toList(),
+                        imagemRepository.findByProdutoId(prod.getId())));
     }
 
     @Transactional
