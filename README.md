@@ -192,11 +192,6 @@ Link do projeto: [https://github.com/UnBArqDsw2022-1/2022.1_G3_Bazar_Backend](ht
 
 <!-- ACKNOWLEDGMENTS -->
 
-## Agradecimentos
-
-- []()
-- []()
-- []()
 
 <p align="right">(<a href="#top">Voltar ao topo</a>)</p>
 
